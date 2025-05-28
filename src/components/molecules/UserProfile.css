@@ -1,0 +1,221 @@
+/* Estilos para el componente de perfil de usuario */
+.user-profile {
+  position: relative;
+  display: inline-block;
+}
+
+/* Estilos para el botón de perfil */
+.profile-button {
+  background-color: rgba(106, 90, 205, 0.1);
+  border: none;
+  color: var(--color-primary);
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+}
+
+.profile-button:hover {
+  color: white;
+  background-color: var(--color-primary);
+}
+
+/* Estilos para el menú desplegable */
+.profile-menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  width: 280px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  overflow: hidden;
+  animation: fadeInDown 0.3s ease forwards;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Estilos para el encabezado del menú */
+.profile-menu-header {
+  padding: 1.2rem;
+  background-color: #f9f9f9;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  align-items: center;
+}
+
+.profile-menu-header h4 {
+  margin: 0;
+  font-size: 1rem;
+  color: #333;
+}
+
+/* Estilos para el avatar de usuario */
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--color-primary);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  margin-right: 1rem;
+}
+
+/* Estilos para la información del usuario */
+.user-info {
+  flex: 1;
+}
+
+.user-info h4 {
+  margin: 0;
+  font-size: 1rem;
+  color: #333;
+}
+
+.user-info p {
+  margin: 0;
+  font-size: 0.8rem;
+  color: #666;
+}
+
+/* Estilos para el contenido del menú */
+.profile-menu-content {
+  padding: 1rem;
+}
+
+/* Estilos para la lista de opciones del menú */
+.profile-menu-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.profile-menu-list li {
+  margin-bottom: 0.5rem;
+}
+
+.profile-menu-list li a,
+.profile-menu-list li button {
+  display: flex;
+  align-items: center;
+  padding: 0.7rem;
+  color: #333;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.profile-menu-list li a:hover,
+.profile-menu-list li button:hover {
+  background-color: #f5f5f5;
+  color: var(--color-primary);
+}
+
+.menu-icon {
+  margin-right: 0.8rem;
+  font-size: 1.1rem;
+  color: #666;
+}
+
+.profile-menu-list li a:hover .menu-icon,
+.profile-menu-list li button:hover .menu-icon {
+  color: var(--color-primary);
+}
+
+/* Estilos para el separador del menú */
+.menu-divider {
+  height: 1px;
+  background-color: #eee;
+  margin: 0.5rem 0;
+}
+
+/* Estilos para los botones de autenticación */
+.auth-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.login-button,
+.register-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.8rem;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.login-button {
+  background-color: var(--color-primary);
+  color: white;
+  border: none;
+}
+
+.login-button:hover {
+  background-color: var(--color-primary-dark);
+}
+
+.register-button {
+  background-color: transparent;
+  color: var(--color-primary);
+  border: 1px solid var(--color-primary);
+  text-align: center;
+}
+
+.register-button:hover {
+  background-color: rgba(106, 90, 205, 0.1);
+}
+
+.button-icon {
+  margin-right: 0.5rem;
+}
+
+/* Estilos para el botón de cierre de sesión */
+.logout-button {
+  color: #e74c3c !important;
+}
+
+.logout-button:hover {
+  background-color: rgba(231, 76, 60, 0.1) !important;
+}
+
+.logout-button .menu-icon {
+  color: #e74c3c;
+}
+
+/* Media queries para responsive */
+@media (max-width: 768px) {
+  .profile-menu {
+    width: 250px;
+  }
+}

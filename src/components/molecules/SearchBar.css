@@ -1,0 +1,105 @@
+/* Estilos para la barra de búsqueda */
+.search-bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 40px;
+}
+
+/* Estilos para el formulario de búsqueda */
+.search-form {
+  display: flex;
+  align-items: center;
+  background-color: rgba(106, 90, 205, 0.1);
+  border-radius: 30px;
+  overflow: hidden;
+  width: 220px;
+  border: 1px solid rgba(106, 90, 205, 0.3);
+  transition: all 0.3s ease;
+}
+
+/* Estilos para el campo de entrada de búsqueda */
+.search-input {
+  flex: 1;
+  border: none;
+  background-color: transparent;
+  padding: 0.6rem 1rem;
+  font-size: 0.9rem;
+  outline: none;
+  width: 100%;
+  color: var(--color-text);
+}
+
+.search-input::placeholder {
+  color: var(--color-text-light);
+  opacity: 0.7;
+}
+
+/* Estilos para el botón de envío de búsqueda */
+.search-submit {
+  background: none;
+  border: none;
+  color: var(--color-primary);
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 0.5rem 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.search-submit:hover {
+  color: var(--color-primary-dark);
+  transform: scale(1.1);
+}
+
+/* Efectos de hover para el formulario */
+.search-form:hover {
+  background-color: rgba(106, 90, 205, 0.15);
+  border-color: var(--color-primary);
+  box-shadow: 0 2px 8px rgba(106, 90, 205, 0.1);
+}
+
+.search-form:focus-within {
+  background-color: white;
+  border-color: var(--color-primary);
+  box-shadow: 0 2px 8px rgba(106, 90, 205, 0.2);
+}
+
+/* Media queries para responsive */
+@media (max-width: 768px) {
+  .search-form {
+    width: 180px;
+  }
+  
+  .search-input {
+    padding: 0.5rem 0.8rem;
+    font-size: 0.85rem;
+  }
+}
+
+/* Media queries para responsive */
+@media (max-width: 768px) {
+  .search-form {
+    position: fixed;
+    top: 70px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    border-radius: 0;
+    transform: none;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  @keyframes expandSearch {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
