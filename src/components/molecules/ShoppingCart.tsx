@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
+import type { FormEvent } from 'react';
 import { Link } from 'react-router-dom';
-import { FiShoppingCart, FiTrash2, FiX } from 'react-icons/fi';
+import { FiShoppingCart, FiTrash2, FiX, FiMapPin, FiTruck, FiClock } from 'react-icons/fi';
 import { images } from '../../assets/images';
 import './ShoppingCart.css';
 
@@ -33,6 +34,10 @@ const cartItems = [
 // Este componente muestra un icono de carrito con contador y un panel desplegable con los productos
 const ShoppingCart: React.FC = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [zipCode, setZipCode] = useState('');
+  const [zipCodeSubmitted, setZipCodeSubmitted] = useState(false);
+  const [deliveryInfo, setDeliveryInfo] = useState<{available: boolean; time?: string; cost?: number} | null>(null);
+  const [isCheckingZipCode, setIsCheckingZipCode] = useState(false);
   const cartRef = useRef<HTMLDivElement>(null);
   
   // Función para alternar la apertura/cierre del carrito
@@ -57,6 +62,65 @@ const ShoppingCart: React.FC = () => {
   // Función para formatear el precio en formato de moneda argentina
   const formatPrice = (price: number) => {
     return `$ ${price.toLocaleString('es-AR')}`;
+  };
+
+  // Función para verificar el código postal
+  const checkZipCode = (e: FormEvent) => {
+    e.preventDefault();
+    setIsCheckingZipCode(true);
+    
+    // Simulamos una llamada a API para verificar el código postal
+    setTimeout(() => {
+      // Lógica de ejemplo para determinar si el envío está disponible
+      // En un caso real, esto vendría de una API
+      const zipCodeNumber = parseInt(zipCode);
+      
+      if (zipCode.length !== 4 || isNaN(zipCodeNumber)) {
+        setDeliveryInfo(null);
+        setZipCodeSubmitted(true);
+        setIsCheckingZipCode(false);
+        return;
+      }
+      
+      // Códigos postales de ejemplo para diferentes zonas
+      if (zipCodeNumber >= 1000 && zipCodeNumber <= 1499) {
+        // CABA
+        setDeliveryInfo({
+          available: true,
+          time: '24-48 horas',
+          cost: 0 // Envío gratis
+        });
+      } else if (zipCodeNumber >= 1500 && zipCodeNumber <= 1900) {
+        // GBA
+        setDeliveryInfo({
+          available: true,
+          time: '2-3 días hábiles',
+          cost: 1500
+        });
+      } else if (zipCodeNumber >= 2000 && zipCodeNumber <= 9999) {
+        // Interior
+        setDeliveryInfo({
+          available: true,
+          time: '3-5 días hábiles',
+          cost: 2500
+        });
+      } else {
+        // No disponible
+        setDeliveryInfo({
+          available: false
+        });
+      }
+      
+      setZipCodeSubmitted(true);
+      setIsCheckingZipCode(false);
+    }, 1000);
+  };
+  
+  // Función para reiniciar la verificación de código postal
+  const resetZipCode = () => {
+    setZipCode('');
+    setZipCodeSubmitted(false);
+    setDeliveryInfo(null);
   };
 
   // Calcular el total del carrito
@@ -121,6 +185,70 @@ const ShoppingCart: React.FC = () => {
           
           {cartItems.length > 0 && (
             <div className="cart-footer">
+              {/* Sección de verificación de código postal */}
+              <div className="shipping-check">
+                <h5><FiTruck /> Verificar envío a tu zona</h5>
+                
+                {!zipCodeSubmitted ? (
+                  <form onSubmit={checkZipCode} className="zipcode-form">
+                    <div className="zipcode-input-group">
+                      <FiMapPin />
+                      <input 
+                        type="text" 
+                        placeholder="Código Postal" 
+                        value={zipCode}
+                        onChange={(e) => setZipCode(e.target.value)}
+                        maxLength={4}
+                        pattern="[0-9]{4}"
+                        title="Ingresa un código postal válido de 4 dígitos"
+                        required
+                      />
+                    </div>
+                    <button 
+                      type="submit" 
+                      className="check-zipcode-btn"
+                      disabled={isCheckingZipCode}
+                    >
+                      {isCheckingZipCode ? 'Verificando...' : 'Verificar'}
+                    </button>
+                  </form>
+                ) : (
+                  <div className="delivery-result">
+                    {deliveryInfo ? (
+                      deliveryInfo.available ? (
+                        <div className="delivery-available">
+                          <p className="delivery-status success">
+                            <span className="icon-success">✓</span> Envío disponible al CP {zipCode}
+                          </p>
+                          <div className="delivery-details">
+                            <p><FiClock /> Tiempo estimado: {deliveryInfo.time}</p>
+                            <p>Costo de envío: {deliveryInfo.cost === 0 ? 'Gratis' : (deliveryInfo.cost ? formatPrice(deliveryInfo.cost) : '')}</p>
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="delivery-unavailable">
+                          <p className="delivery-status error">
+                            <span className="icon-error">✗</span> No realizamos envíos al CP {zipCode}
+                          </p>
+                        </div>
+                      )
+                    ) : (
+                      <div className="delivery-unavailable">
+                        <p className="delivery-status error">
+                          <span className="icon-error">✗</span> Código postal inválido
+                        </p>
+                      </div>
+                    )}
+                    <button 
+                      className="reset-zipcode-btn" 
+                      onClick={resetZipCode}
+                    >
+                      Verificar otro código postal
+                    </button>
+                  </div>
+                )}
+              </div>
+              
               <div className="cart-total">
                 <span>Total:</span>
                 <span className="total-price">{formatPrice(cartTotal)}</span>

@@ -242,6 +242,158 @@
   border-top: 1px solid #eee;
 }
 
+/* Estilos para la sección de verificación de código postal */
+.shipping-check {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #eee;
+}
+
+.shipping-check h5 {
+  display: flex;
+  align-items: center;
+  font-size: 0.95rem;
+  color: #333;
+  margin: 0 0 1rem 0;
+}
+
+.shipping-check h5 svg {
+  margin-right: 0.5rem;
+  color: var(--color-primary);
+}
+
+/* Estilos para el formulario de código postal */
+.zipcode-form {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.zipcode-input-group {
+  position: relative;
+  flex: 1;
+}
+
+.zipcode-input-group svg {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #999;
+}
+
+.zipcode-input-group input {
+  width: 100%;
+  padding: 0.7rem 0.7rem 0.7rem 2rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  transition: border-color 0.2s ease;
+}
+
+.zipcode-input-group input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+.check-zipcode-btn {
+  background-color: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 0 1rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  white-space: nowrap;
+}
+
+.check-zipcode-btn:hover {
+  background-color: var(--color-primary-dark, #5a4a9e);
+}
+
+.check-zipcode-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Estilos para los resultados de verificación */
+.delivery-result {
+  background-color: #f5f5f5;
+  border-radius: 6px;
+  padding: 1rem;
+}
+
+.delivery-status {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+  font-size: 0.9rem;
+}
+
+.delivery-status.success {
+  color: #2e7d32;
+}
+
+.delivery-status.error {
+  color: #d32f2f;
+}
+
+.icon-success, .icon-error {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin-right: 0.5rem;
+  font-size: 0.8rem;
+}
+
+.icon-success {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+.icon-error {
+  background-color: #ffebee;
+  color: #d32f2f;
+}
+
+.delivery-details {
+  margin-top: 0.8rem;
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.delivery-details p {
+  margin: 0.3rem 0;
+  display: flex;
+  align-items: center;
+}
+
+.delivery-details svg {
+  margin-right: 0.5rem;
+  color: #777;
+}
+
+.reset-zipcode-btn {
+  background: none;
+  border: none;
+  color: var(--color-primary);
+  font-size: 0.85rem;
+  padding: 0.5rem 0 0 0;
+  cursor: pointer;
+  text-decoration: underline;
+  display: block;
+  margin-top: 0.8rem;
+  text-align: right;
+}
+
+.reset-zipcode-btn:hover {
+  color: var(--color-primary-dark, #5a4a9e);
+}
+
 .cart-total {
   display: flex;
   justify-content: space-between;
